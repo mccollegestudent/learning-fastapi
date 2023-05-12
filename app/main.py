@@ -11,7 +11,7 @@ from .config import settings
 app = FastAPI()
 
 #list of all the domains that can talk with our api
-origins=["https://www.google.com"]
+origins=["*"]
 
 app.add_middleware(
     CORSMiddleware,
