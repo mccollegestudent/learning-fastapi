@@ -1,0 +1,14 @@
+[Unit]
+Description=demo fastapi application
+After=network.target
+
+[Service]
+User=manatsa
+Group=manatsa
+WorkingDirectory=/home/manatsa/app/src
+Environment="PATH=/home/manatsa/app/venv/bin"
+EnvironmentFile=/home/manatsa/.env
+ExecStart=/home/manatsa/app/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
