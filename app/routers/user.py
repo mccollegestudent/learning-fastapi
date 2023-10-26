@@ -14,6 +14,11 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     hashed_password = utils.hash(user.password)
     user.password = hashed_password  #we here we now updateting the pydantic user model
     new_user = models.User(**user.dict()) #auto unpacking dictionary to name = user.name
+
+    user_record = db.query(models.User).filter(models.User.email == new_user.email).first() #if user already exists
+    if user_record:
+        raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail=f"User with email: {new_user.email} already exist")
+    
     db.add(new_user)
     db.commit()
     db.refresh(new_user) #retrieve new post
