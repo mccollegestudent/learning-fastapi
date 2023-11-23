@@ -22,7 +22,7 @@ class UserOut(BaseModel):
         orm_mode = True
         
 class Post(PostBase):
-    #id:int
+    id:int
     created_at: datetime
     owner_id: int
     owner: UserOut
@@ -40,9 +40,6 @@ class PostOut(BaseModel):
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
-
-
-
 
 class UserLogin(BaseModel):
     email: EmailStr
