@@ -10,6 +10,7 @@ from app.database import Base
 import pytest
 
 from app.oauth2 import create_access_token
+from app import models
 
 SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}_test'
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
@@ -49,6 +50,7 @@ def test_user(client): # could actually do this with sessions
 def token(test_user):
     return create_access_token({"user_id" : test_user['id']})
 
+@pytest.fixture
 def authorized_client(client, token): # we update the headers
         
     client.headers = {
@@ -56,3 +58,32 @@ def authorized_client(client, token): # we update the headers
         "Authorization": f"Bearer {token}"
     }
     return client
+
+@pytest.fixture
+def test_posts(test_user, session):
+    posts_data = [{
+                    "title": "First Post",
+                    "content": "This is the content of the first post.",
+                    "owner_id": test_user['id']
+                },
+                {
+                    "title": "Second Post",
+                    "content": "This is the content of the second post.",
+                    "owner_id": test_user['id']
+                },
+                {
+                    "title": "Third Post",
+                    "content": "This is the content of the third post.",
+                    "owner_id": test_user['id']
+                }]
+    def create_post_model (post):
+        return models.Post(**post)
+    
+    post_map = map(create_post_model, posts_data)  
+    posts = list(post_map)
+    
+    session.add_all(posts)
+    session.commit()
+    posts = session.query(models.Post).all()
+    return posts
+    
