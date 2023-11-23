@@ -9,6 +9,8 @@ from app.database import get_db
 from app.database import Base
 import pytest
 
+from app.oauth2 import create_access_token
+
 SQLALCHEMY_DATABASE_URL = f'postgresql://{settings.database_username}:{settings.database_password}@{settings.database_hostname}:{settings.database_port}/{settings.database_name}_test'
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine) #talking with database
@@ -42,3 +44,15 @@ def test_user(client): # could actually do this with sessions
     new_user = res.json()
     new_user['password'] = user_data['password']
     return new_user
+
+@pytest.fixture
+def token(test_user):
+    return create_access_token({"user_id" : test_user['id']})
+
+def authorized_client(client, token): # we update the headers
+        
+    client.headers = {
+        **client.headers,
+        "Authorization": f"Bearer {token}"
+    }
+    return client
