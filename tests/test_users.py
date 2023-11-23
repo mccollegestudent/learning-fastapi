@@ -1,18 +1,7 @@
 from app import schemas
-from .database import client, session
-import pytest
-
 from jose import jwt             #validation
 from app.config import settings
-
-@pytest.fixture
-def test_user(client): # could actually do this with sessions
-    user_data = {"email":'hello@gmail.com', "password": '1234'}
-    res = client.post("/users/", json = user_data)
-    assert res.status_code == 201
-    new_user = res.json()
-    new_user['password'] = user_data['password']
-    return new_user
+import pytest
 
 def test_root(client):
     res = client.get("/") #we dont need the root we just use the app instance since its not a server etc
@@ -35,3 +24,16 @@ def test_login_user(client, test_user):
     assert id == test_user['id'] #valid check
     assert login_res.token_type == 'bearer'
     assert res.status_code == 200
+
+@pytest.mark.parametrize("email, password, status_code", [
+                        ("user123@example.com", "passw0rd!", 403),
+                        ("john_doe@gmail.com", "securePwd123", 403),
+                        ("test_user@hotmail.com", "P@ssw0rd", 403),
+                        (None, "1234abcd", 422),
+                        ("demo_user@example.org", None, 422)
+                        ])
+def test_incorrect_login(test_user, client, email, password, status_code):
+    res = client.post("login", data={"username":email, "password": password})
+    assert res.status_code == status_code
+
+
