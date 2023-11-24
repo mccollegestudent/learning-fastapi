@@ -47,6 +47,15 @@ def test_user(client): # could actually do this with sessions
     return new_user
 
 @pytest.fixture
+def test_user2(client): # second user for testing
+    user_data = {"email":'bye@gmail.com', "password": '1234'}
+    res = client.post("/users/", json = user_data)
+    assert res.status_code == 201
+    new_user = res.json()
+    new_user['password'] = user_data['password']
+    return new_user
+
+@pytest.fixture
 def token(test_user):
     return create_access_token({"user_id" : test_user['id']})
 
@@ -60,7 +69,7 @@ def authorized_client(client, token): # we update the headers
     return client
 
 @pytest.fixture
-def test_posts(test_user, session):
+def test_posts(test_user, session, test_user2):
     posts_data = [{
                     "title": "First Post",
                     "content": "This is the content of the first post.",
@@ -75,6 +84,11 @@ def test_posts(test_user, session):
                     "title": "Third Post",
                     "content": "This is the content of the third post.",
                     "owner_id": test_user['id']
+                },
+                {
+                    "title": "first Post",
+                    "content": "Nice to meet you I'm bye .",
+                    "owner_id": test_user2['id']
                 }]
     def create_post_model (post):
         return models.Post(**post)
