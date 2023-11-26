@@ -4,13 +4,19 @@ on:
   - push
   - pull_request
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  job1:
+  build:
     runs-on: ubuntu-latest
-    steps: 
-      - name: pulling git repo
-        uses: action/checkout@v2
-      - name: say hi to universe   
-        run: echo "Hello universe"
-       
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
