@@ -1,12 +1,6 @@
 name: Build and Deploy Code
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 
 jobs:
   job1:
@@ -15,7 +9,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Install python version 3.9
-        uses: actions/setup-python@v2 #installing python
+        uses: actions/setup-python@v2
         with:
           python-version: "3.9"
       - name: Update pip
