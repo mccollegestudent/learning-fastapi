@@ -69,5 +69,3 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
       - name: Image digest
         run: echo ${{steps.docker_build.outputs.digest}}
-
-      - name: Set up Docker Buildx
