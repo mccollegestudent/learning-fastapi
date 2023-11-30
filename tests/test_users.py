@@ -6,7 +6,7 @@ import pytest
 def test_root(client):
     res = client.get("/") #we dont need the root we just use the app instance since its not a server etc
     print(res.json().get('message'))
-    assert res.json().get('message') == 'Welcome to my api'
+    assert res.json().get('message') == 'message": "Welcome to my api testing CD'
 
 def test_create_user(client):
     res = client.post("/users", json={"email":"hello@gmail.com", "password":"1234"})

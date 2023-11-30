@@ -30,7 +30,7 @@ app.include_router(vote.router)
 #path operation or route 
        
 def root():                                          
-    return {"message": "Welcome to my api"}           
+    return {"message": "Welcome to my api testing CD"}           
 
 
 
