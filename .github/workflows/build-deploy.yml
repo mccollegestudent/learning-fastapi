@@ -73,7 +73,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: [build]
-    environement:
+    environment:
       name: production
     steps:
       - name: deploy on ubuntu server
