@@ -76,13 +76,13 @@ jobs:
     environement:
       name: production
     steps:
-    - name: deploy on ubuntu server
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets.PROD_HOST }}
-        username: ${{ secrets.PROD_USERNAME }}
-        password: ${{ secrets.PROD_PASSWORD }}
-        script: |
-          cd app/src
-          git pull
-          echo ${{ secrets.PROD_PASSWORD }} | sudo -S systemctl restart api
+      - name: deploy on ubuntu server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USERNAME }}
+          password: ${{ secrets.PROD_PASSWORD }}
+          script: |
+            cd app/src
+            git pull
+            echo ${{ secrets.PROD_PASSWORD }} | sudo -S systemctl restart api
