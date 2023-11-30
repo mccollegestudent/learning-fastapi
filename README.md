@@ -16,5 +16,5 @@ Documentation: Find detailed documentation at edenschat.xyz/docs for easy refere
 
 
 ## 📘 Documentation
-Check out the live demo of the FastAPI Social Media App at [edenschat.xyz](https://edenschat.xyz/docs). Witness firsthand how Nginx and a well-configured firewall contribute to a secure, performant, and responsive user experience.
+Check out the live demo of the FastAPI Social Media App at [edenschat.xyz/docs](https://edenschat.xyz/docs). Witness firsthand how Nginx and a well-configured firewall contribute to a secure, performant, and responsive user experience.
 Currently depoyed on Azure Ubuntu  20.0.4 VM (as of time of documentaion - may change in the future)
