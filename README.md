@@ -1,5 +1,5 @@
 #learning-fastapi
-This is my social media python api made for learning purposes
+This is my simple yet comprehensive social media python api
 
 ##🔗 Some Features
 - **GitHub Actions CI/CD Pipeline**: Automated testing and deployment with a streamlined Continuous Integration and Continuous Deployment (CI/CD) pipeline using GitHub Actions.
@@ -16,5 +16,5 @@ Documentation: Find detailed documentation at edenschat.xyz/docs for easy refere
 
 
 ## 📘 Documentation
-Check out the live demo of the FastAPI Social Media App at [edenschat.xyz/docs](https://edenschat.xyz/docs). Witness firsthand how Nginx and a well-configured firewall contribute to a secure, performant, and responsive user experience.
+Check out the live demo of the FastAPI Social Media API at [edenschat.xyz/docs](https://edenschat.xyz/docs). 
 Currently depoyed on Azure Ubuntu  20.0.4 VM (as of time of documentaion - may change in the future)
