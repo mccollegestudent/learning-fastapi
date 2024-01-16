@@ -18,7 +18,7 @@ class UserOut(BaseModel):
     email: EmailStr
     created_at: datetime
 
-    class Config: #sql alchemy mode we get we need pydatic to convert it into a regular model
+    class Config: #sql alchemy mode - convets pydatic regular model
         orm_mode = True
         
 class Post(PostBase):
@@ -31,7 +31,7 @@ class Post(PostBase):
         orm_mode = True
 
 class PostOut(BaseModel):
-    Post: Post                              #capitalze this for some reason
+    Post: Post                              
     votes: int
 
     class Config:
@@ -45,7 +45,7 @@ class UserLogin(BaseModel):
     email: EmailStr
     password: str
 
-class Token(BaseModel): #not working for some reason
+class Token(BaseModel): 
     access_token: str
     token_type: str
 
