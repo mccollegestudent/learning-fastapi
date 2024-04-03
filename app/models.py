@@ -10,10 +10,10 @@ class Post(Base):
     id = Column(Integer, primary_key=True, nullable=False)
     title = Column(String, nullable=False)
     content = Column(String,nullable= False)  
-    published = Column(Boolean, server_default='True', nullable= False) #postgre server or database server that will send the default
+    published = Column(Boolean, server_default='True', nullable= False) 
     created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=text('now()')) 
 
-    owner_id = Column(Integer, ForeignKey("users.id", ondelete = "CASCADE" ), nullable = False)   #type - foreighn column relation - policy
+    owner_id = Column(Integer, ForeignKey("users.id", ondelete = "CASCADE" ), nullable = False)   
 
     #this will return the class of another model - not referencing user table but rather sql class
     #this will return owner owner property this will determine the relationship
